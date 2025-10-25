@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Secure Payment · Dubai Padel Vibes</title>
+  <meta name="description" content="Pay & confirm your spot at Dubai Padel Vibes. Apple Pay, Google Pay, Visa, Mastercard via Mamo Business.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%230f0f12'/%3E%3Cpath fill='%23ffd65e' d='M32 14c-3 0-5 2-5 5 0 2 1 4 3 5-6 1-10 5-10 11 0 6 5 10 12 10s12-4 12-10c0-5-4-9-10-10 2-1 3-3 3-5 0-3-2-5-5-5z'/%3E%3C/svg%3E" />
+  <style>
+    body{
+      margin:0;
+      background-color:#0f0f12;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.07) 0%, rgba(0,0,0,0) 60%),
+        radial-gradient(circle at 80% 20%, rgba(255,214,94,0.14) 0%, rgba(0,0,0,0) 70%);
+      background-repeat:no-repeat;
+      background-size:cover;
+      color:#fff;
+      font-family:-apple-system,BlinkMacSystemFont,"Inter","Roboto","Helvetica Neue",Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;
+      padding:2rem 1rem 4rem;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      min-height:100vh;
+    }
+
+    .wrapper{
+      width:100%;
+      max-width:480px;
+      display:flex;
+      flex-direction:column;
+      gap:1.5rem;
+    }
+
+    nav{
+      background:rgba(18,18,22,0.8);
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:14px;
+      box-shadow:0 30px 80px rgba(0,0,0,0.9);
+      padding:.75rem .9rem;
+      font-size:.8rem;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:.75rem;
+    }
+    nav a{
+      color:rgba(255,255,255,0.75);
+      text-decoration:none;
+      font-weight:500;
+      line-height:1.2;
+      letter-spacing:-0.03em;
+    }
+    nav a.active{color:#ffd65e;}
+    nav a:hover{color:#fff;}
+
+    .card{
+      position:relative;
+      background:rgba(18,18,22,0.8);
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:20px;
+      padding:1.5rem 1.5rem 2rem;
+      box-shadow:0 30px 80px rgba(0,0,0,0.9);
+    }
+    .card::after{
+      content:"";
+      position:absolute;
+      top:-60px;
+      right:-60px;
+      width:140px;
+      height:140px;
+      background:radial-gradient(circle,rgba(255,214,94,0.22)0%,rgba(0,0,0,0)70%);
+      filter:blur(20px);
+      z-index:0;
+      pointer-events:none;
+    }
+
+    header{
+      position:relative;
+      z-index:2;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      margin-bottom:1.25rem;
+    }
+
+    .brand-block{display:flex;flex-direction:column;}
+    .brand-name{
+      font-size:1rem;
+      font-weight:600;
+      line-height:1.2;
+      color:#fff;
+      letter-spacing:-0.03em;
+      display:flex;
+      align-items:center;
+      gap:.5rem;
+    }
+    .brand-logo-circle{
+      width:28px;
+      height:28px;
+      border-radius:8px;
+      background:radial-gradient(circle at 30% 30%,#ffd65e 0%,#ff9a1f 60%,rgba(0,0,0,0)70%);
+      box-shadow:0 8px 30px rgba(255,154,31,0.5);
+      position:relative;
+      flex-shrink:0;
+    }
+    .brand-logo-circle::after{
+      content:"";
+      position:absolute;
+      left:7px;
+      top:6px;
+      width:14px;
+      height:14px;
+      border-radius:3px;
+      border:2px solid #0f0f12;
+      box-shadow:0 0 4px rgba(0,0,0,0.7) inset;
+      background:rgba(15,15,18,0.3);
+      transform:rotate(15deg);
+    }
+
+    .brand-sub{
+      font-size:.8rem;
+      line-height:1.2;
+      color:rgba(255,255,255,0.6);
+      margin-top:.25rem;
+    }
+
+    .badge{
+      font-size:.7rem;
+      font-weight:500;
+      line-height:1;
+      color:#0f0f12;
+      background:linear-gradient(90deg,#ffd65e 0%,#ffb84a 100%);
+      border-radius:999px;
+      padding:.4rem .6rem;
+      box-shadow:0 6px 20px rgba(255,184,74,0.4);
+      white-space:nowrap;
+    }
+
+    .section-title{
+      font-size:1rem;
+      font-weight:600;
+      line-height:1.3;
+      color:#fff;
+      letter-spacing:-0.03em;
+      margin-bottom:.5rem;
+    }
+
+    .section-desc{
+      font-size:.8rem;
+      line-height:1.4;
+      color:rgba(255,255,255,0.65);
+      margin-bottom:1rem;
+    }
+
+    .info-box{
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.07);
+      border-radius:12px;
+      padding:.9rem 1rem;
+      margin-bottom:1rem;
+      font-size:.8rem;
+      line-height:1.4;
+      color:#fff;
+    }
+
+    .row{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      width:100%;
+      font-size:.8rem;
+      line-height:1.4;
+      color:#fff;
+      margin-bottom:.5rem;
+    }
+    .row-label{
+      color:rgba(255,255,255,0.55);
+      font-weight:400;
+      padding-right:.5rem;
+    }
+    .row-value{
+      text-align:right;
+      font-weight:500;
+      color:#fff;
+    }
+
+    .price-row{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      margin-bottom:.5rem;
+    }
+    .price-label{
+      font-size:.8rem;
+      font-weight:400;
+      color:rgba(255,255,255,0.55);
+    }
+    .price-amount{
+      font-size:1rem;
+      font-weight:600;
+      color:#ffd65e;
+      letter-spacing:-0.03em;
+    }
+    .price-note{
+      font-size:.7rem;
+      line-height:1.3;
+      color:rgba(255,255,255,0.45);
+      margin-top:.25rem;
+    }
+
+    .pay-button{
+      display:block;
+      width:100%;
+      background:linear-gradient(90deg,#ffd65e 0%,#ff9a1f 100%);
+      color:#0f0f12;
+      border:0;
+      border-radius:12px;
+      font-size:1rem;
+      font-weight:600;
+      line-height:1.2;
+      text-align:center;
+      padding:.9rem 1rem;
+      cursor:pointer;
+      box-shadow:0 20px 40px rgba(255,154,31,0.4);
+      text-decoration:none;
+      letter-spacing:-0.03em;
+      margin-bottom:.5rem;
+    }
+    .pay-button:active{transform:scale(.99);}
+
+    .after-pay-note{
+      font-size:.7rem;
+      line-height:1.4;
+      color:rgba(255,255,255,0.5);
+      text-align:center;
+      margin-bottom:1.5rem;
+    }
+    .after-pay-note span{
+      color:rgba(255,255,255,0.9);
+      font-weight:500;
+    }
+
+    footer{
+      text-align:center;
+      margin-top:1.5rem;
+      font-size:.7rem;
+      line-height:1.4;
+      color:rgba(255,255,255,0.4);
+    }
+    .legal-line{
+      color:rgba(255,255,255,0.4);
+    }
+    .legal-entity{
+      color:rgba(255,255,255,0.7);
+      font-weight:500;
+    }
+    .refund-note{
+      margin-top:.75rem;
+      color:rgba(255,255,255,0.35);
+      font-size:.65rem;
+      line-height:1.4;
+    }
+
+    @media(min-width:480px){
+      nav{font-size:.8rem;}
+      .card{padding:2rem 2rem 2.25rem;}
+      .section-title{font-size:1.05rem;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- NAV -->
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="sessions.html">Sessions</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="contact.html">Contact</a>
+      <a class="active" href="pay.html">Pay</a>
+    </nav>
+
+    <!-- PAYMENT CARD -->
+    <main class="card">
+      <header>
+        <div class="brand-block">
+          <div class="brand-name">
+            <span class="brand-logo-circle"></span>
+            <span>Dubai Padel Vibes</span>
+          </div>
+          <div class="brand-sub">Play. Connect. Vibe.</div>
+        </div>
+
+        <div class="badge">Secure payment</div>
+      </header>
+
+      <section>
+        <div class="section-title">Join the game</div>
+        <div class="section-desc">
+          Pay now to confirm your spot in the next Dubai Padel Vibes session.
+        </div>
+
+        <div class="info-box">
+          <div class="row">
+            <div class="row-label">Session</div>
+            <div class="row-value">Dubai Padel Vibes — Match / Court Share</div>
+          </div>
+
+          <div class="row">
+            <div class="row-label">Location</div>
+            <div class="row-value">Dubai, UAE</div>
+          </div>
+
+          <div class="row">
+            <div class="row-label">Status</div>
+            <div class="row-value">Pending payment</div>
+          </div>
+
+          <div class="price-row">
+            <div class="price-label">Session Fee</div>
+            <div class="price-amount">AED 120</div>
+          </div>
+
+          <div class="price-note">
+            Court & balls included.<br>
+            Payment confirms your spot.
+          </div>
+        </div>
+
+        <!-- ВАЖНО: вот тут потом меняешь href="#" на свою Mamo ссылку -->
+        <a
+          class="pay-button"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Pay & Confirm Spot
+        </a>
+
+        <div class="after-pay-note">
+          You’ll be redirected to a secure checkout powered by
+          <span>Mamo Business</span>.<br>
+          Apple Pay, Google Pay, Visa, Mastercard accepted.
+        </div>
+      </section>
+
+      <footer>
+        <div class="legal-line">Powered by Mamo Business</div>
+        <div class="legal-line">Funds settled to <span class="legal-entity">Your Company LLC</span></div>
+
+        <div class="refund-note">
+          Payments are non-refundable unless the session is cancelled by Dubai Padel Vibes.
+        </div>
+      </footer>
+    </main>
+
+  </div>
+</body>
+</html>
